@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
-const fs = require('fs');
+
+function imagesHaveLoaded() { return Array.from(document.images).every((i) => i.complete); }
 
 (async () => {
 
@@ -9,14 +10,18 @@ const fs = require('fs');
     // Create a new page
     const page = await browser.newPage();
 
-    //Get HTML content from HTML file
-    const html = fs.readFileSync('sample.html', 'utf-8');
-    await page.setContent(html, { waitUntil: 'domcontentloaded' });
+    // Website URL to export as pdf
+    const website_url = 'https://dev-ohto.pantheonsite.io/tnb-pdf?nid=1588';
 
-    // To reflect CSS used for screens instead of print
+    // Open URL in current page
+    await page.goto(website_url, { waitUntil: 'networkidle0' });
+
+    // await page.waitForFunction(imagesHaveLoaded);
+
+    //To reflect CSS used for screens instead of print
     await page.emulateMediaType('screen');
 
-    // Downlaod the PDF
+// Downlaod the PDF
     const pdf = await page.pdf({
         path: 'result.pdf',
         margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
