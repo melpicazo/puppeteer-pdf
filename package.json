@@ -1,0 +1,22 @@
+{
+  "name": "puppeteer-pdf",
+  "version": "1.0.0",
+  "description": "Converting HTML to PDF with Node.Js and Puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melpicazo/puppeteer-pdf.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melpicazo/puppeteer-pdf/issues"
+  },
+  "homepage": "https://github.com/melpicazo/puppeteer-pdf#readme",
+  "dependencies": {
+    "puppeteer": "^15.5.0"
+  }
+}
