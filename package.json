@@ -18,5 +18,8 @@
   "homepage": "https://github.com/melpicazo/puppeteer-pdf#readme",
   "dependencies": {
     "puppeteer": "^15.5.0"
+  },
+  "devDependencies": {
+    "prettier": "2.7.1"
   }
 }
