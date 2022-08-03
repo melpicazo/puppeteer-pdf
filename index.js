@@ -41,20 +41,24 @@ const scrollPage = async (page) => {
   // HACK: Scroll through whole page to load all images
   await scrollPage(page);
 
-  // Attempt at saving as one page
-  const elem = await page.$("html");
-  const boundingBox = await elem.boundingBox();
-  console.log("boundingBox", boundingBox);
-
-  // await page.setViewport({
-  //   width: 800,
-  //   height: 14788.484375,
-  // });
+  // HACK: Save PDF as one page
+  const scrollDimension = await page.evaluate(async () => {
+    return {
+      width: document.documentElement.scrollWidth,
+      height: document.documentElement.scrollHeight,
+    };
+  });
+  await page.setViewport({
+    width: 450,
+    height: scrollDimension.height,
+  });
 
   // Downlaod the PDF
   const pdf = await page.pdf({
     path: "result.pdf",
     printBackground: true,
+    width: 450,
+    height: scrollDimension.height,
   });
 
   // Close the browser instance
