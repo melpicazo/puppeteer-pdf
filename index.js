@@ -24,6 +24,10 @@ const scrollPage = async (page) => {
   // Create a browser instance
   const browser = await puppeteer.launch({
     headless: true,
+    defaultViewport: {
+      width: 450,
+      height: 0,
+    },
   });
 
   // Create a new page
@@ -45,11 +49,13 @@ const scrollPage = async (page) => {
   const scrollDimension = await page.evaluate(async () => {
     return {
       width: document.documentElement.scrollWidth,
-      height: document.documentElement.scrollHeight,
+      height: document.documentElement.scrollHeight + 1,
     };
   });
+
   await page.setViewport({
     width: 450,
+    // width: scrollDimension.width,
     height: scrollDimension.height,
   });
 
@@ -59,6 +65,7 @@ const scrollPage = async (page) => {
     printBackground: true,
     width: 450,
     height: scrollDimension.height,
+    pageRanges: "1",
   });
 
   // Close the browser instance
